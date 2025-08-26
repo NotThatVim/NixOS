@@ -83,16 +83,16 @@
     serviceConfig = {
       Type = "oneshot";
       User = "vim"; # Sostituisci "vim" con il tuo username
-    };
-};
+	    };
+	};
 
   systemd.timers.voto-alert = {
     wantedBy = [ "timers.target" ];
     timerConfig = {
       OnUnitActiveSec = "5min";
       AccuracySec = "1min";
-    };
-};
+    		};
+	};
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -175,4 +175,4 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
 
-};
+}
