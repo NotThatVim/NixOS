@@ -119,7 +119,7 @@
 	freetube 
 	tor-browser
 	neovim
-	jetbrains.clion 
+	vscode 
 ];
 
   # Some programs need SUID wrappers, can be configured further or are
