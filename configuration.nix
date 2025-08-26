@@ -77,6 +77,23 @@
     #media-session.enable = true;
   };
 
+  systemd.services.voto-alert = {
+    description = "Esegue lo script per controllare i voti";
+    script = "${pkgs.python3}/bin/python3 ${/home/vim/Documenti/VotoAlert/webscraper.py}";
+    serviceConfig = {
+      Type = "oneshot";
+      User = "vim"; # Sostituisci "vim" con il tuo username
+    };
+};
+
+  systemd.timers.voto-alert = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnUnitActiveSec = "5min";
+      AccuracySec = "1min";
+    };
+};
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -119,7 +136,16 @@
 	freetube 
 	tor-browser
 	neovim
-	vscode 
+	vscode
+(pkgs.python3.withPackages (ps: [
+
+    ps.requests
+
+    ps.beautifulsoup4
+
+    ps.python-telegram-bot
+
+  ]))
 ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -149,4 +175,4 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
 
-}
+};
